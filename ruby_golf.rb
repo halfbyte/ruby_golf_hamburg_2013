@@ -103,7 +103,7 @@ module RubyGolf
     x = 0
     s.upcase.split().map{|w|
       w.each_char.inject(0) {|m,c| m + (c.ord - 64) }
-    }.sort.each_with_index{|w,i| x += (i + 1) * w }
+    }.sort.reverse.each_with_index{|w , i| x += (i + 1) * w }
     x
   end
 
