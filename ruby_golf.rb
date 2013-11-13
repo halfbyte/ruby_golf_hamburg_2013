@@ -123,9 +123,9 @@ module RubyGolf
     b=[]
     a=s.split(/\n/).map{|l| l.split(" ")}
     a.map{|c| 
-      x,y,z = c
-      b[y.to_i] ||= []
-      b[y.to_i][x.to_i] = z.to_i
+      x,y,z = c.map(&:to_i)
+      b[y] ||= []
+      b[y][x] = z
     }
     b.map{|l| l.map{ |c| c ? c.chr : ' '}.join.rstrip + "\n"}.join
   end
