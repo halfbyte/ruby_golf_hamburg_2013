@@ -8,7 +8,7 @@ module RubyGolf
   #         v - number of visible trailing numbers
   # output: x'ed out string
   def self.x_out_numbers(n, v)
-    p = n.length - v
+    p = n.size - v
     p>0 ? n.gsub(/\d{#{p}}/, 'x' * p) : n
   end
 
@@ -82,7 +82,7 @@ module RubyGolf
   #           level are prepended by two additional spaces per level away from
   #           the top level
   def self.pretty_hash(h, d=0)
-    a = h.map{|k,v| (" " * d) + k.to_s + ":\n" + (v.is_a?(Hash) ? pretty_hash(v,d+2) : [v].flatten.map{|a| (" " * d) + "- " + "#{a}" + "\n"}.join())}.join()
+    a = h.map{|k,v| (" " * d) + k.to_s + ":\n" + (!v[0] ? pretty_hash(v,d+2) : [v].flatten.map{|a| (" " * d) + "- " + "#{a}" + "\n"}.join())}.join()
   end
 
 
@@ -103,7 +103,9 @@ module RubyGolf
     x = 0
     s.upcase.split().map{|w|
       w.each_char.inject(0) {|m,c| m + (c.ord - 64) }
-    }.sort.reverse.each_with_index{|w , i| x += (i + 1) * w }
+    }.sort.reverse.inject(1){|m,w| x += (m) * w 
+      m+1
+    }
     x
   end
 
@@ -126,7 +128,6 @@ module RubyGolf
       b[y.to_i][x.to_i] = z.to_i
     }
     b.map{|l| l.map{ |c| c ? c.chr : ' '}.join.rstrip + "\n"}.join
-    
   end
 
 end
