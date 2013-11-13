@@ -8,7 +8,7 @@ module RubyGolf
   #         v - number of visible trailing numbers
   # output: x'ed out string
   def self.x_out_numbers(n, v)
-    p = (n.length - v)
+    p = n.length - v
     p>0 ? n.gsub(/\d{#{p}}/, 'x' * p) : n
   end
 
@@ -49,7 +49,7 @@ module RubyGolf
   #         columns
   
   def self.grid_computing(g)
-    a = g.split("\n").map{|s| s.split(" ")}
+    a = g.split("\n").map{|s| s.split }
     (a + a.transpose).inject(0) {|y,l| 
       s=l.inject(0){|m,n| m+n.to_i}
       s>y ? s : y
@@ -65,7 +65,7 @@ module RubyGolf
   # output: a string describing the same hash but without hash rockets, but
   #         otherwise with the same formatting
   def self.reformat_hash(s)
-    s.gsub(/:{1}([a-z]+):{0} \=\>/, '\1:')
+    s.gsub(/:(\w+) =>/, '\1:')
   end
 
 
